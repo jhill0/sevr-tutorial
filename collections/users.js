@@ -26,7 +26,8 @@ module.exports = types => ({
 			label: 'Password',
 			schemaType: types.String({
 				required: true,
-				hidden: true
+				hidden: true,
+				// select: false
 			})
 		}
 	},
