@@ -1,6 +1,6 @@
 module.exports = {
 	connection: {
-		database: 'ichabod-tutorial'
+		database: 'sevr-tutorial'
 	},
 	permissions: {
 		roles: {

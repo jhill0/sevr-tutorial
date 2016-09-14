@@ -1,16 +1,20 @@
 {
-  "name": "ichabod-tutorial",
-  "version": "1.0.0",
-  "description": "Tutorial project for the Ichabod CMS Framework",
+  "name": "sevr-tutorial",
+  "version": "0.1.0",
+  "description": "Tutorial project for the Sevr CMS Framework",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./index.js"
   },
+  "repository": {
+      "type": "git",
+      "url": "git@github.com:ExclamationLabs/sevr-tutorial.git"
+  },
   "author": "David Street",
   "license": "MIT",
   "dependencies": {
-      "ichabod-cli": "^0.1.0",
-      "ichabod-core": "^0.1.0"
+      "sevr-cli": "^0.1.0",
+      "sevr": "^0.1.0"
   }
 }

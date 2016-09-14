@@ -4,7 +4,7 @@
 
 We now have a way to describe our data, and a way to store our data. Next, we
 need some actual data! The quickest way to start adding and managing data for
-our blog is to use the Ichabod CLI.
+our blog is to use the Sevr CLI.
 
 By default, when building a project using the `ich init` command, the remote
 CLI plugin is added. This will allow you access to basic CRUD operations for
@@ -20,10 +20,10 @@ We will need to specify which port we want to connect to. The service listens
 on port 4000 by default.
 
 ```
-$ ich manage -p 4000
+$ sevr manage -p 4000
 ```
 
-This will connect to the running Ichabod instance and start an interactive shell.
+This will connect to the running Sevr instance and start an interactive shell.
 From here, there are a number of different commands that can be run to
 manipulate the data; We will walk through each of them.
 
@@ -31,7 +31,7 @@ manipulate the data; We will walk through each of them.
 The first command, `collections`, simply lists all available collections.
 
 ```
-ichabod-remote$ collections
+sevr-remote$ collections
 
 ```
 
@@ -49,7 +49,7 @@ Before we look at any of the other commands, we will need to add some data using
 the `create` command.
 
 ```
-ichabod-remote$ create users
+sevr-remote$ create users
 ```
 
 ... will bring up a prompt to enter data for each of the fields defined by the
@@ -88,7 +88,7 @@ Password: whothef*ck
 ```
 Title: tutorial
 
-Title: ichabod
+Title: sevr
 ```
 
 Next, go ahead and create a post and note the prompt types for tags and author.
@@ -97,7 +97,7 @@ Next, go ahead and create a post and note the prompt types for tags and author.
 The `find` command allows us to search for documents within a collection.
 
 ```
-ichabod-remote$ find users
+sevr-remote$ find users
 ```
 
 will return all users in the collection. From there, you can select which
@@ -105,7 +105,7 @@ document from the list you would like to view. To narrow the search results, you
 can supply a query:
 
 ```
-ichabod-remote$ find users username=twaits
+sevr-remote$ find users username=twaits
 ```
 
 ## Update
@@ -114,7 +114,7 @@ syntax similar to `find`, you will be provided a selection of documents to
 choose from.
 
 ```
-ichabod-remote$ update users
+sevr-remote$ update users
 ```
 
 Once you choose a document, you will be able to change the contents of the
@@ -123,7 +123,7 @@ fields available for edit, you can use utilize the selection option. For
 instance, if you wanted only edit the username of a user:
 
 ```
-ichabod-remote$ update users -s=username
+sevr-remote$ update users -s=username
 ```
 
 to exclude a field:
@@ -131,13 +131,13 @@ to exclude a field:
 ```
 // TODO: If excluding the defaultField, the prompt displays a list of array
 // indices
-ichabod-remote$ update users -s=-name
+sevr-remote$ update users -s=-name
 ```
 
 ... or to include a field that would otherwise be excluded by default:
 
 ```
-ichabod-remote$ update users -s=+password
+sevr-remote$ update users -s=+password
 ```
 
 ## Delete
@@ -146,7 +146,7 @@ To remove a document or documents, the `delete` command is used. Like `find` and
 `update`, a query can also be used to limit the result set.
 
 ```
-ichabod-remote$ delete tags
+sevr-remote$ delete tags
 ```
 
 The command will provide a prompt of documents to delete. You can select any

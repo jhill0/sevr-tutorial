@@ -4,7 +4,7 @@
 
 ## Dependencies
 
-The Ichabod CMS Framework is dependent on the Node.js runtime,
+The Sevr CMS Framework is dependent on the Node.js runtime,
 npm (included with Node.js) and MongoDB. Please download and install these if
 you have not already.
 
@@ -12,14 +12,14 @@ you have not already.
 - [MongoDB](https://www.mongodb.com/download-center#community)
 
 
-## Installing the Ichabod CLI
+## Installing the Sevr CLI
 
-For this tutorial, we will be creating our project using the Ichabod CLI, an
-immersive command line tool for working with the Ichabod CMS Framework. The tool
+For this tutorial, we will be creating our project using the Sevr CLI, an
+immersive command line tool for working with the Sevr CMS Framework. The tool
 can be easily installed with npm:
 
 ```
-$ npm install -g ichabod-cli
+$ npm install -g sevr-cli
 ```
 
 
@@ -28,8 +28,8 @@ $ npm install -g ichabod-cli
 Once installed, we'll need to create our project directory and enter into it:
 
 ```
-$ mkdir ich-tutorial
-$ cd ich-tutorial
+$ mkdir sevr-tutorial
+$ cd sevr-tutorial
 ```
 
 We can now have the command line tool scaffold out our project by installing
@@ -38,7 +38,7 @@ an `index.js`, the entry point of our CMS. Use the following command and answer
 all prompts.
 
 ```
-$ ich init ich-tutorial
+$ ich init sevr-tutorial
 $ npm install
 ```
 

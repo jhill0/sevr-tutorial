@@ -4,7 +4,7 @@
 
 For our blog, we are going to need to restrict access to the data. For instance,
 we do not want the end user access to modify the data, only view it. This is
-commonly achieved by installing an authentication mechanism. Ichabod, provides
+commonly achieved by installing an authentication mechanism. Sevr, provides
 username/password and JWT authentication strategies out of the box, but also
 provides the basic building blocks for implementing your own authentication
 strategies.
@@ -14,50 +14,50 @@ strategies.
 
 Authentication is disabled by default to enable quick development, but enabling
 it is really easy. To do so, simply pass the collection that will be used for
-validating credentials to the `ichabod.authentication.enable` method. For our
+validating credentials to the `sevr.authentication.enable` method. For our
 purposes, we'll use the `users` collection.
 
 **Note**: The authentication collection, must have `username` and `password`
 fields.
 
 ```javascript
-const Ichabod = require('ichabod-core')
-const cli     = require('ichabod-cli')
-const config  = require('./config')
-const web     = require('./web')
+const Sevr   = require('sevr')
+const cli    = require('sevr-cli')
+const config = require('./config')
+const web    = require('./web')
 
-const ichabod = new Ichabod(config)
+const sevr = new Sevr(config)
 
-ichabod.attach(cli)
+sevr.attach(cli)
 
 // Attach the frontend web plugin
-ichabod.attach(web)
+sevr.attach(web)
 
-ichabod.connect()
+sevr.connect()
 	.then(() => {
-		ichabod.logger.verbose('Initialized database connection')
-		ichabod.logger.verbose('Enabling authentication...')
+		sevr.logger.verbose('Initialized database connection')
+		sevr.logger.verbose('Enabling authentication...')
 
 		// Enable authentication with the `users` collection
-		ichabod.authentication.enable(ichabod.collections.users)
+		sevr.authentication.enable(sevr.collections.users)
 	})
 	.catch(err => {
-		ichabod.logger.error(err)
+		sevr.logger.error(err)
 	})
 
-ichabod.startServer()
+sevr.startServer()
 
-module.exports = ichabod
+module.exports = sevr
 ```
 
 ## Adding Roles & Permissions
 
 In addition to authentication, we'll add specific user roles and permissions to
-further restrict access. To do so, we need to add a new plugin, `ichabod-perm`,
+further restrict access. To do so, we need to add a new plugin, `sevr-perm`,
 which adds operation-level permission support to individual collections.
 
 ```
-npm install --save ichabod-perm
+npm install --save sevr-perm
 ```
 
 Let's start by defining our user roles. To do so, we'll modifiy our config.
@@ -93,21 +93,21 @@ Now that we have our roles defined, we can enable them and attach them to the
 authentication collection.
 
 ```javascript
-const Ichabod = require('ichabod-core')
-const cli     = require('ichabod-cli')
-const perm    = require('ichabod-perm')
-const config  = require('./config')
-const web     = require('./web')
+const Sevr   = require('sevr')
+const cli    = require('sevr-cli')
+const perm   = require('sevr-perm')
+const config = require('./config')
+const web    = require('./web')
 
-const ichabod = new Ichabod(config)
+const sevr = new Sevr(config)
 
-ichabod.attach(cli)
+sevr.attach(cli)
 
 // Attach the frontend web plugin
-ichabod.attach(web)
+sevr.attach(web)
 
 // Attach the permissions plugin
-ichabod.attach(perm, config.permissions)
+sevr.attach(perm, config.permissions)
 ...
 ```
 
@@ -116,4 +116,4 @@ authentication and roles.
 
 ---
 
-[< Previous - Consuming Data](6_consuming_data.md) | [Next - Adding a RESTful Interface](8_ichabod_rest.md)
+[< Previous - Consuming Data](6_consuming_data.md) | [Next - Adding a RESTful Interface](8_sevr_rest.md)

@@ -9,14 +9,14 @@ In the framework, collections are defined using what is called a collection
 definition, which is an extension of Mongoose's model schema.
 
 For our blog, we will need to define four collections: users, posts, tags, and
-media. We'll use the Ichabod CLI tool to create our collection definitions.
+media. We'll use the Sevr CLI tool to create our collection definitions.
 
 ```
 $ ich coll users
 ```
 
 The first line above, enters the immersive CLI interface. Secondly, the
-`add collection` command tells Ichabod to create a new collection named `users`.
+`add collection` command tells Sevr to create a new collection named `users`.
 The tool will create a new file, `users.js`, in your `collections` directory; It
 should look something like this:
 

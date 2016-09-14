@@ -16,7 +16,7 @@ validator to ensure the input is a qualified email address.
 As with collections, we can use the CLI to scaffold out our custom field type:
 
 ```
-$ ich type email
+$ sevr type email
 ```
 
 This should generate a new file, `email.js`, in the `types` directory. Its

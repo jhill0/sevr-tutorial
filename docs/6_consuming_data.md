@@ -5,7 +5,7 @@
 We have now defined our data, described a way of storing the data, and have even
 begun adding and managing the data via the CLI. Since we are building a blog,
 we now need a way to present our data to an end user. We'll do this by creating
-a simple site as a plugin for Ichabod.
+a simple site as a plugin for Sevr.
 
 
 ## Initial Setup
@@ -24,53 +24,53 @@ Within the `index.js`, add the following code:
 
 const express = require('express')
 
-module.exports = (ichabod, _config) => {
+module.exports = (sevr, _config) => {
 	const app = express()
 
-	app.get('/', (req, res) => { res.send('Welcome to the Ichabod Blog!') })
+	app.get('/', (req, res) => { res.send('Welcome to the Sevr Blog!') })
 
 	// Wait for the DB to be connected
-	ichabod.events.on('db-ready', () => {
+	sevr.events.on('db-ready', () => {
 
-		// Attach the web app to the ichabod server
-		ichabod.server.use(app)
+		// Attach the web app to the sevr server
+		sevr.server.use(app)
 	})
 }
 ```
 
-We now need to register our plugin with Ichabod. We can do this by calling
-Ichabod's `attach` method in our root `index.js`:
+We now need to register our plugin with Sevr. We can do this by calling
+Sevr's `attach` method in our root `index.js`:
 
 ```javascript
-const Ichabod = require('ichabod-core')
-const cli     = require('ichabod-cli')
-const config  = require('./config')
-const web     = require('./web')
+const Sevr   = require('sevr')
+const cli    = require('sevr-cli')
+const config = require('./config')
+const web    = require('./web')
 
-const ichabod = new Ichabod(config)
+const sevr = new Sevr(config)
 
-ichabod.attach(cli)
+sevr.attach(cli)
 
 // Attach the frontend web plugin
-ichabod.attach(web)
+sevr.attach(web)
 
-ichabod.connect()
+sevr.connect()
 	.then(() => {
-		ichabod.logger.verbose('Initialized database connection')
+		sevr.logger.verbose('Initialized database connection')
 	})
 	.catch(err => {
-		ichabod.logger.error(err)
+		sevr.logger.error(err)
 	})
 
-ichabod.startServer()
+sevr.startServer()
 
-module.exports = ichabod
+module.exports = sevr
 ```
 
 We can now run our application and test that the plugin initialized correctly
-and attached to the Ichabod server by running `npm start` and visiting
+and attached to the Sevr server by running `npm start` and visiting
 `http://localhost:3000/` in a browser. You should see message
-'Welcome to the Ichabod Blog!'
+'Welcome to the Sevr Blog!'
 
 ## Add Templates
 
@@ -143,10 +143,10 @@ Lastly, we need to add a few routes to our plugin file in order render the pages
 ```javascript
 // Home route
 app.get('/', (req, res) => {
-	ichabod.collections.posts.read(null, null, true)
+	sevr.collections.posts.read(null, null, true)
 		.then(posts => {
 			res.send(template({
-				site: { title: 'Ichabod Blog' },
+				site: { title: 'Sevr Blog' },
 				posts
 			}))
 		})
@@ -154,10 +154,10 @@ app.get('/', (req, res) => {
 
 // Tag route
 app.get('/tag/:id', (req, res) => {
-	ichabod.collections.posts.read({ tags: req.params.id }, null, true)
+	sevr.collections.posts.read({ tags: req.params.id }, null, true)
 		.then(posts => {
 			res.send(template({
-				site: { title: 'Ichabod Blog' },
+				site: { title: 'Sevr Blog' },
 				posts
 			}))
 		})
@@ -166,10 +166,10 @@ app.get('/tag/:id', (req, res) => {
 
 // Author route
 app.get('/author/:id', (req, res) => {
-	ichabod.collections.posts.read({ author: req.params.id }, null, true)
+	sevr.collections.posts.read({ author: req.params.id }, null, true)
 		.then(posts => {
 			res.send(template({
-				site: { title: 'Ichabod Blog' },
+				site: { title: 'Sevr Blog' },
 				posts
 			}))
 		})

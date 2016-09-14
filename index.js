@@ -1,32 +1,32 @@
-const Ichabod = require('ichabod-core')
-const cli     = require('ichabod-cli')
-const perm    = require('ichabod-perm')
+const Sevr = require('sevr')
+const cli  = require('sevr-cli')
+const perm = require('sevr-perm')
 
 const config  = require('./config')
 const web     = require('./web')
 
-const ichabod = new Ichabod(config)
+const sevr = new Sevr(config)
 
-ichabod.attach(cli)
+sevr.attach(cli)
 
 // Attach the frontend web plugin
-ichabod.attach(web)
+sevr.attach(web)
 
 // Attach the permissions plugin
-ichabod.attach(perm, config.permissions)
+sevr.attach(perm, config.permissions)
 
-ichabod.connect()
+sevr.connect()
 	.then(() => {
-		ichabod.logger.verbose('Initialized database connection')
-		ichabod.logger.verbose('Enabling authentication...')
+		sevr.logger.verbose('Initialized database connection')
+		sevr.logger.verbose('Enabling authentication...')
 
 		// Enable authentication with the `users` collection
-		ichabod.authentication.enable(ichabod.collections.users)
+		sevr.authentication.enable(sevr.collections.users)
 	})
 	.catch(err => {
-		ichabod.logger.error(err.stack)
+		sevr.logger.error(err.stack)
 	})
 
-ichabod.startServer()
+sevr.startServer()
 
-module.exports = ichabod
+module.exports = sevr

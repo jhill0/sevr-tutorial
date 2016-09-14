@@ -9,4 +9,4 @@
 5. [Use The CLI to Manage Data](5_cli.md)
 6. [Consuming Data](6_consuming_data.md)
 7. [Authentication & Roles](7_authentication_roles.md)
-8. [Adding a RESTful Interface](8_ichabod_rest.md)
+8. [Adding a RESTful Interface](8_sevr_rest.md)

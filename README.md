@@ -1,9 +1,9 @@
-# Ichabod Tutorial
+# Sevr Tutorial
 ---
 
-These are the source files used for the Ichabod blog tutorial.
+These are the source files used for the Sevr blog tutorial.
 
-## Starting
+## Running
 
 ```
 $ npm install
