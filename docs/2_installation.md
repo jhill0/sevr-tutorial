@@ -38,7 +38,7 @@ an `index.js`, the entry point of our CMS. Use the following command and answer
 all prompts.
 
 ```
-$ ich init sevr-tutorial
+$ sevr init sevr-tutorial
 $ npm install
 ```
 
