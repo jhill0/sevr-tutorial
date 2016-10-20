@@ -6,7 +6,7 @@ We now have a way to describe our data, and a way to store our data. Next, we
 need some actual data! The quickest way to start adding and managing data for
 our blog is to use the Sevr CLI.
 
-By default, when building a project using the `ich init` command, the remote
+By default, when building a project using the `sevr init` command, the remote
 CLI plugin is added. This will allow you access to basic CRUD operations for
 managing the application's collections. The service starts with the application,
 and begins listening to incoming connections.
@@ -59,8 +59,8 @@ field type.
 Go ahead and create a user with the following data:
 
 ```
-First Name: Nick
-Last Name: Cave
+First: Nick
+Last: Cave
 Username: ncave
 Email: nick@nickcave.com
 Password: lazarus
@@ -69,14 +69,14 @@ Password: lazarus
 Let's create two more users using the following data:
 
 ```
-First Name: Tom
-Last Name: Waits
+First: Tom
+Last: Waits
 Username: twaits
 Email: mrwaits@tomwaits.com
 Password: raindogs
 
-First Name: PJ
-Last Name: Harvey
+First: PJ
+Last: Harvey
 Username: pjharvey
 Email: pj@pjharvey.com
 Password: whothef*ck
