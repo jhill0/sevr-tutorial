@@ -2,7 +2,7 @@
 
 ---
 
-Collections are an integral part of the Icahbod CMS Framework. They define the
+Collections are an integral part of the Sevr CMS Framework. They define the
 storage and behavior of the data used by the CMS. In data persistence terms, a
 collection is how groups of related documents are stored in the MongoDB database.
 In the framework, collections are defined using what is called a collection
@@ -12,7 +12,7 @@ For our blog, we will need to define four collections: users, posts, tags, and
 media. We'll use the Sevr CLI tool to create our collection definitions.
 
 ```
-$ ich coll users
+$ sevr coll users
 ```
 
 The first line above, enters the immersive CLI interface. Secondly, the
@@ -28,7 +28,7 @@ module.exports = types => ({
 })
 ```
 
-This is the basic structure of a collection definition, where `singular` is name
+This is the basic structure of a collection definition, where `singular` is the name
 of the document model, `fields` is an object containing each of the fields, and
 `meta` is an object which holds additional data which may be needed for other
 functions of the framework of one of its plugins.
@@ -39,7 +39,7 @@ need to define a `label` and a `schemaType`.
 
 ```javascript
 module.exports = types => ({
-	singular: 'Users',
+	singular: 'User',
 	fields: {
 		name: {
 			label: 'Name',
@@ -121,7 +121,7 @@ module.exports = types => ({
 			label: 'Author',
 			schemaType: types.ObjectId({
 				required: true,
-				ref: 'Author',
+				ref: 'User',
 				display: 'username'
 			})
 		},

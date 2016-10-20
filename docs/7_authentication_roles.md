@@ -60,7 +60,7 @@ which adds operation-level permission support to individual collections.
 npm install --save sevr-perm
 ```
 
-Let's start by defining our user roles. To do so, we'll modifiy our config.
+Let's start by defining our user roles. To do so, we'll modify our config.
 
 ```javascript
 module.exports = {
