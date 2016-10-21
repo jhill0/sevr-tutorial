@@ -1,7 +1,8 @@
 # Sevr Tutorial
----
 
 These are the source files used for the Sevr blog tutorial.
+
+## [View Tutorial](docs)
 
 ## Running
 

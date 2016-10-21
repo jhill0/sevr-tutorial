@@ -12,7 +12,7 @@ managing the application's collections. The service starts with the application,
 and begins listening to incoming connections.
 
 ```
-$ npm start
+$ sevr start
 ```
 
 Next, if we open a new terminal, we can run the `manage` command within the CLI.

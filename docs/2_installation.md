@@ -54,10 +54,10 @@ You should now have a directory structure that looks something like this:
 └── types
 ```
 
-You can now run your application for the first time:
+You can now run your application for the first time (though it won't do much of anything):
 
 ```
-$ npm start
+$ sevr start
 ```
 ---
 

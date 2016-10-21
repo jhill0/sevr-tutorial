@@ -1,32 +1,48 @@
-const Sevr = require('sevr')
-const cli  = require('sevr-cli')
-const perm = require('sevr-perm')
+const Sevr      = require('sevr')
+const SevrCli   = require('sevr-cli')
+const SevrPerm  = require('sevr-perm') 
+const WebServer = require('./web')   
+const config    = require('./config')
 
-const config  = require('./config')
-const web     = require('./web')
+/**
+ * Application plugin class
+ * 
+ * All custom application intialization and logic
+ * should happen within this class
+ * 
+ * @class App
+ */
+class App {
+	constructor(sevr) {
+		this.sevr = sevr
+	}
 
+	willRun() {
+		this.sevr.logger.info('Enabling authentication...')
+		return this.sevr.authentication.enable(this.sevr.collections.users)
+	}
+
+	run() {
+		this.sevr.startServer()
+		this.sevr.logger.verbose('Application running...')
+	}
+}
+
+// Create a new Sevr instance
 const sevr = new Sevr(config)
 
-sevr.attach(cli)
+// Attach the remote CLI plugin
+sevr.attach(SevrCli)
 
-// Attach the frontend web plugin
-sevr.attach(web)
+// Attach the web server
+sevr.attach(WebServer)
 
 // Attach the permissions plugin
-sevr.attach(perm, config.permissions)
+sevr.attach(SevrPerm, config.permissions)
 
-sevr.connect()
-	.then(() => {
-		sevr.logger.verbose('Initialized database connection')
-		sevr.logger.verbose('Enabling authentication...')
+// Attach the application plugin
+sevr.attach(App)
 
-		// Enable authentication with the `users` collection
-		sevr.authentication.enable(sevr.collections.users)
-	})
-	.catch(err => {
-		sevr.logger.error(err.stack)
-	})
-
-sevr.startServer()
+sevr.start()
 
 module.exports = sevr

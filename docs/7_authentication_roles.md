@@ -21,31 +21,47 @@ purposes, we'll use the `users` collection.
 fields.
 
 ```javascript
-const Sevr   = require('sevr')
-const cli    = require('sevr-cli')
-const config = require('./config')
-const web    = require('./web')
+const Sevr      = require('sevr')
+const SevrCli   = require('sevr-cli')
+const WebServer = require('./web')
 
-const sevr = new Sevr(config)
+/**
+ * Application plugin class
+ * 
+ * All custom application intialization and logic
+ * should happen within this class
+ * 
+ * @class App
+ */
+class App {
+	constructor(sevr) {
+		this.sevr = sevr
+	}
 
-sevr.attach(cli)
+	willRun() {
+		this.sevr.logger.info('Enabling authentication...')
+		return this.sevr.authentication.enable(this.sevr.collections.users)
+	}
 
-// Attach the frontend web plugin
-sevr.attach(web)
+	run() {
+		this.sevr.startServer()
+		this.sevr.logger.verbose('Application running...')
+	}
+}
 
-sevr.connect()
-	.then(() => {
-		sevr.logger.verbose('Initialized database connection')
-		sevr.logger.verbose('Enabling authentication...')
+// Create a new Sevr instance
+const sevr = new Sevr()
 
-		// Enable authentication with the `users` collection
-		sevr.authentication.enable(sevr.collections.users)
-	})
-	.catch(err => {
-		sevr.logger.error(err)
-	})
+// Attach the remote CLI plugin
+sevr.attach(SevrCli)
 
-sevr.startServer()
+// Attach the web server
+sevr.attach(WebServer)
+
+// Attach the application plugin
+sevr.attach(App)
+
+sevr.start()
 
 module.exports = sevr
 ```
@@ -93,21 +109,24 @@ Now that we have our roles defined, we can enable them and attach them to the
 authentication collection.
 
 ```javascript
-const Sevr   = require('sevr')
-const cli    = require('sevr-cli')
-const perm   = require('sevr-perm')
-const config = require('./config')
-const web    = require('./web')
+const Sevr      = require('sevr')
+const SevrCli   = require('sevr-cli')
+const SevrPerm  = require('sevr-perm)
+const WebServer = require('./web')
+const config    = require('./config)
+
+...
 
 const sevr = new Sevr(config)
 
-sevr.attach(cli)
-
-// Attach the frontend web plugin
-sevr.attach(web)
+...
 
 // Attach the permissions plugin
-sevr.attach(perm, config.permissions)
+sevr.attach(SevrPerm, config.permissions)
+
+// Attach the application plugin
+sevr.attach(App)
+
 ...
 ```
 

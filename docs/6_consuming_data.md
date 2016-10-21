@@ -24,17 +24,22 @@ Within the `index.js`, add the following code:
 
 const express = require('express')
 
-module.exports = (sevr, _config) => {
-	const app = express()
+class WebServer {
+	constructor(sevr) {
+		const app = express()
 
-	app.get('/', (req, res) => { res.send('Welcome to the Sevr Blog!') })
+		app.get('/', (req, res) => {
+			res.send('Welcome to the Sevr Blog!')
+		})
 
-	// Wait for the DB to be connected
-	sevr.events.on('db-ready', () => {
+		this.sevr = sevr
+		this.app = app
+	}
 
-		// Attach the web app to the sevr server
-		sevr.server.use(app)
-	})
+	willRun() {
+		// Attach the web app to the Sevr server
+		this.sevr.server.use(this.app)
+	}
 }
 ```
 
@@ -42,33 +47,46 @@ We now need to register our plugin with Sevr. We can do this by calling
 Sevr's `attach` method in our root `index.js`:
 
 ```javascript
-const Sevr   = require('sevr')
-const cli    = require('sevr-cli')
-const config = require('./config')
-const web    = require('./web')
+const Sevr      = require('sevr')
+const SevrCli   = require('sevr-cli')
+const WebServer = require('./web')
 
-const sevr = new Sevr(config)
+/**
+ * Application plugin class
+ * 
+ * All custom application intialization and logic
+ * should happen within this class
+ * 
+ * @class App
+ */
+class App {
+	constructor(sevr) {
+		this.sevr = sevr
+	}
 
-sevr.attach(cli)
+	run() {
+		this.sevr.startServer()
+		this.sevr.logger.verbose('Application running...')
+	}
+}
 
-// Attach the frontend web plugin
-sevr.attach(web)
+// Create a new Sevr instance
+const sevr = new Sevr()
 
-sevr.connect()
-	.then(() => {
-		sevr.logger.verbose('Initialized database connection')
-	})
-	.catch(err => {
-		sevr.logger.error(err)
-	})
+// Attach the remote CLI plugin
+sevr.attach(SevrCli)
 
-sevr.startServer()
+// Attach the web server
+sevr.attach(WebServer)
+
+// Attach the application plugin
+sevr.attach(App)
 
 module.exports = sevr
 ```
 
 We can now run our application and test that the plugin initialized correctly
-and attached to the Sevr server by running `npm start` and visiting
+and attached to the Sevr server by running `sevr start` and visiting
 `http://localhost:3000/` in a browser. You should see message
 'Welcome to the Sevr Blog!'
 
@@ -132,13 +150,13 @@ module.exports = ({ site, posts }) => `
 Next we need to import the template file in our plugin file. Add the following
 line:
 
-```
+```javascript
 const template = require('./templates/index.html')
 ```
 
 ## Add Routes
 
-Lastly, we need to add a few routes to our plugin file in order render the pages:
+Lastly, we need to add a few routes to our plugin constructor in order render the pages:
 
 ```javascript
 // Home route
