@@ -41,6 +41,8 @@ class WebServer {
 		this.sevr.server.use(this.app)
 	}
 }
+
+module.exports = WebServer
 ```
 
 We now need to register our plugin with Sevr. We can do this by calling
