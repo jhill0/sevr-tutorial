@@ -111,9 +111,9 @@ authentication collection.
 ```javascript
 const Sevr      = require('sevr')
 const SevrCli   = require('sevr-cli')
-const SevrPerm  = require('sevr-perm)
+const SevrPerm  = require('sevr-perm')
 const WebServer = require('./web')
-const config    = require('./config)
+const config    = require('./config')
 
 ...
 
