@@ -46,13 +46,13 @@ Lets go ahead and update the `email` field in the `users` collection to use the
 new `email` field type:
 
 ```javascript
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Users',
 	fields: {
 		...
 		email: {
 			label: 'Email',
-			schemaType: types.Email()
+			schemaType: Types.Email()
 		},
 		...
 	},

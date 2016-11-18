@@ -1,21 +1,21 @@
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Post',
 	fields: {
 		title: {
 			label: 'Title',
-			schemaType: types.String({ required: true })
+			schemaType: Types.String({ required: true })
 		},
 		slug: {
 			label: 'Slug',
-			schemaType: types.String({ required: true })
+			schemaType: Types.String({ required: true })
 		},
 		content: {
 			label: 'Post Content',
-			schemaType: types.String()
+			schemaType: Types.String()
 		},
 		author: {
 			label: 'Author',
-			schemaType: types.ObjectId({
+			schemaType: Types.ObjectId({
 				required: true,
 				ref: 'User',
 				display: 'username'
@@ -24,7 +24,7 @@ module.exports = types => ({
 		tags: {
 			label: 'Tags',
 			schemaType: [
-				types.ObjectId({
+				Types.ObjectId({
 					ref: 'Tag',
 					display: 'title'
 				})

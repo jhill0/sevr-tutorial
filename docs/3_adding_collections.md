@@ -21,7 +21,7 @@ The tool will create a new file, `users.js`, in your `collections` directory; It
 should look something like this:
 
 ```javascript
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'User',
 	fields: {},
 	meta: {}
@@ -38,17 +38,17 @@ this collection: name, username, email, and password. Each of these fields will
 need to define a `label` and a `schemaType`.
 
 ```javascript
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'User',
 	fields: {
 		name: {
 			label: 'Name',
 			schemaType: {
-				first: types.String({
+				first: Types.String({
 					required: true,
 					label: 'First'
 				}),
-				last: types.String({
+				last: Types.String({
 					required: true,
 					label: 'Last'
 				})
@@ -56,15 +56,15 @@ module.exports = types => ({
 		},
 		username: {
 			label: 'Username',
-			schemaType: types.String({ required: true })
+			schemaType: Types.String({ required: true })
 		},
 		email: {
 			label: 'Email',
-			schemaType: types.String()
+			schemaType: Types.String()
 		},
 		password: {
 			label: 'Password',
-			schemaType: types.String({
+			schemaType: Types.String({
 				required: true,
 				hidden: true
 			})
@@ -84,12 +84,12 @@ We'll follow the same procedure to create the remaining collection definitions:
 
 ```javascript
 // tags.js
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Tag',
 	fields: {
 		title: {
 			label: 'Title',
-			schemaType: types.String({
+			schemaType: Types.String({
 				required: true,
 				trim: true
 			})
@@ -102,24 +102,24 @@ module.exports = types => ({
 
 ```javascript
 // posts.js
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Post',
 	fields: {
 		title: {
 			label: 'Title',
-			schemaType: types.String({ required: true })
+			schemaType: Types.String({ required: true })
 		},
 		slug: {
 			label: 'Slug',
-			schemaType: types.String({ required: true })
+			schemaType: Types.String({ required: true })
 		},
 		content: {
 			label: 'Post Content',
-			schemaType: types.String()
+			schemaType: Types.String()
 		},
 		author: {
 			label: 'Author',
-			schemaType: types.ObjectId({
+			schemaType: Types.ObjectId({
 				required: true,
 				ref: 'User',
 				display: 'username'
@@ -128,7 +128,7 @@ module.exports = types => ({
 		tags: {
 			label: 'Tags',
 			schemaType: [
-				types.ObjectId({
+				Types.ObjectId({
 					ref: 'Tag',
 					display: 'title'
 				})
@@ -142,16 +142,16 @@ module.exports = types => ({
 
 ```javascript
 // media.js
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Media',
 	fields: {
 		path: {
 			label: 'Path',
-			schemaType: types.String({ required: true})
+			schemaType: Types.String({ required: true})
 		},
 		caption: {
 			label: 'Caption',
-			schemaType: types.String()
+			schemaType: Types.String()
 		}
 	},
 	defaultField: 'path',

@@ -1,9 +1,9 @@
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Tag',
 	fields: {
 		title: {
 			label: 'Title',
-			schemaType: types.String({
+			schemaType: Types.String({
 				required: true,
 				trim: true
 			})

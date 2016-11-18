@@ -1,14 +1,14 @@
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'User',
 	fields: {
 		name: {
 			label: 'Name',
 			schemaType: {
-				first: types.String({
+				first: Types.String({
 					required: true,
 					label: 'First'
 				}),
-				last: types.String({
+				last: Types.String({
 					required: true,
 					label: 'Last'
 				})
@@ -16,15 +16,15 @@ module.exports = types => ({
 		},
 		username: {
 			label: 'Username',
-			schemaType: types.String({ required: true })
+			schemaType: Types.String({ required: true })
 		},
 		email: {
 			label: 'Email',
-			schemaType: types.Email()
+			schemaType: Types.Email()
 		},
 		password: {
 			label: 'Password',
-			schemaType: types.String({
+			schemaType: Types.String({
 				required: true,
 				hidden: true,
 				// select: false

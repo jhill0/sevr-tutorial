@@ -1,13 +1,13 @@
-module.exports = types => ({
+module.exports = Types => ({
 	singular: 'Media',
 	fields: {
 		path: {
 			label: 'Path',
-			schemaType: types.String({ required: true})
+			schemaType: Types.String({ required: true})
 		},
 		caption: {
 			label: 'Caption',
-			schemaType: types.String()
+			schemaType: Types.String()
 		}
 	},
 	defaultField: 'path',
